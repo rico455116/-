@@ -41,7 +41,14 @@
 		<?php
 		echo "資料庫連接中";
 		$mysqli = new mysqli("localhost", "root","",  "member_db");
-		mysqli_select_db($mysqli, "time");
+		$sql = "CREATE TABLE users (
+		id INT(6)
+		)";
+		if ($mysqli->query($sql) === TRUE) {
+			echo "Table 'users' created successfully";
+		} else {
+			echo "Error creating table: " . $mysqli->error;
+		}
 		mysqli_close($mysqli);
 		?>
 
