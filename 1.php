@@ -24,7 +24,8 @@
         <p>點擊按鈕增加計數：</p>
         <div id="counter">0</div>
         <button id="incrementBtn">增加計數</button>
-		<button id="imput_sql">匯入資料庫</button>
+		<a href = "<http://172.19.112.1/1.php?counts=>counts">
+		<button id="imput_sql">匯入資料庫</button></a>
     </div>
 
     <script>
@@ -39,6 +40,7 @@
             counts++;
             counterElement.textContent = counts;
         });
+		if(counts != 0){
 		imput_sql.addEventListener('click', function() {
 			<?php
 			echo "資料庫連接中";
@@ -53,6 +55,7 @@
 			mysqli_close($mysqli);
 			?>
         });
+		};
     </script>
 
 </body>
