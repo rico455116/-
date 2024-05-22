@@ -24,34 +24,35 @@
         <p>點擊按鈕增加計數：</p>
         <div id="counter">0</div>
         <button id="incrementBtn">增加計數</button>
+		<button id="imput_sql">匯入資料庫</button>
     </div>
 
     <script>
         // 獲取計數器元素和按鈕元素
         const counterElement = document.getElementById('counter');
         const incrementBtn = document.getElementById('incrementBtn');        // 初始化計數器值
-        let count = 0;
-        counterElement.textContent = count;
+        let counts = 0;
+        counterElement.textContent = counts;
 
         // 點擊按鈕時更新計數器
         incrementBtn.addEventListener('click', function() {
-            count++;
-            counterElement.textContent = count;
+            counts++;
+            counterElement.textContent = counts;
         });
-		<?php
-		echo "資料庫連接中";
-		$mysqli = new mysqli("localhost", "root","",  "member_db");
-		$sql = "CREATE TABLE users (
-		id INT(6)
-		)";
-		if ($mysqli->query($sql) === TRUE) {
-			echo "Table 'users' created successfully";
-		} else {
-			echo "Error creating table: " . $mysqli->error;
-		}
-		mysqli_close($mysqli);
-		?>
-
+		imput_sql.addEventListener('click', function() {
+			<?php
+			echo "資料庫連接中";
+			$count = $_GET["counts"];
+			$mysqli = new mysqli("localhost", "root","",  "member_db");
+			$sql = sprintf("INSERT INTO users VALUES(\"%s\"),$count");
+			if ($mysqli->query($sql) === TRUE) {
+				echo "Table 'users' created successfully";
+			} else {
+				echo "Error creating table: " . $mysqli->error;
+			}
+			mysqli_close($mysqli);
+			?>
+        });
     </script>
 
 </body>
